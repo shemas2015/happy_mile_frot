@@ -1,3 +1,5 @@
+import { CitaModel } from './../../models/Interfaces';
+import { CitaComponent } from './../cita/cita.component';
 import { Component, OnInit,ChangeDetectionStrategy,ViewChild,TemplateRef, } from '@angular/core';
 
 
@@ -46,15 +48,16 @@ export class CitasComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
-
   CalendarView = CalendarView;
-
   viewDate: Date = new Date();
 
   modalData: {
     action: string;
     event: CalendarEvent;
   };
+
+
+  
 
   actions: CalendarEventAction[] = [
     {
@@ -76,7 +79,9 @@ export class CitasComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
+  
+
+  events: CalendarEvent [] = [
     /*
     {
       start: subDays(startOfDay(new Date()), 1),
@@ -111,14 +116,9 @@ export class CitasComponent implements OnInit {
     {
       start: new Date(),
       end: addHours(new Date(), 1),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
+      title: 'Juan Sebastián Daza',
+      color: colors.blue,
+      draggable: true
     },
   ];
 
@@ -167,6 +167,42 @@ export class CitasComponent implements OnInit {
   }
 
   addEvent(): void {
+
+    
+    
+    //this.modal.open(this.modalContent, { size: 'lg' });
+    const modalCita = this.modal.open( CitaComponent  , {  size: 'lg' });
+    //modalCita.componentInstance.cita = null;
+    modalCita.componentInstance.passEntry.subscribe((cita:CitaModel) => {
+        let fIni = new Date(cita.fecha);
+        fIni.setHours( parseInt(cita.horaInicio.split(":")[0]) );
+        fIni.setMinutes( parseInt(cita.horaInicio.split(":")[1]) );
+
+        let fFin = new Date(cita.fecha);
+        fFin.setHours( parseInt(cita.horaFin.split(":")[0]) );
+        fFin.setMinutes( parseInt(cita.horaFin.split(":")[1]) );
+
+
+        modalCita.close();
+        
+        this.events =[
+          ...this.events,
+          {
+            title: cita.paciente.identificacion,
+            start: fIni,
+            end: fFin,
+            color: colors.red,
+            draggable: true
+          }
+        ];
+        
+
+        
+    })
+    
+
+    //this.modal.co
+    /*
     this.events = [
       ...this.events,
       {
@@ -181,6 +217,7 @@ export class CitasComponent implements OnInit {
         },
       },
     ];
+    */
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
@@ -194,5 +231,8 @@ export class CitasComponent implements OnInit {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
+
+
+  
 
 }
