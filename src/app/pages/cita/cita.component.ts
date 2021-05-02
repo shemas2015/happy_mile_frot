@@ -1,10 +1,7 @@
-import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { CalendarEvent } from 'angular-calendar';
-import { CitaModel,PacienteModel } from './../../models/Interfaces';
-import { AppModule } from './../../app.module';
-import { Component, OnInit, EventEmitter, Output, Injectable } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { CitaModel, PacienteModel, DoctorModel } from './../../models/Interfaces';
+import { Component, OnInit, EventEmitter, Output, Injectable, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {DatePipe, formatDate} from '@angular/common';
 
@@ -20,13 +17,28 @@ import {DatePipe, formatDate} from '@angular/common';
 export class CitaComponent implements OnInit {
 
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
+  @Input() public citaOut;
 
   cita: CitaModel;
   paciente: PacienteModel;
   horai: any;
+  doctor: DoctorModel;
   
 
+  doctores: DoctorModel[] = [
+    {
+      userId         : null,
+      nombres        : "Carlos Alberto",
+      apellidos      : "Perez",
+      identificacion : "1002251856",
+      color          : {
+                        primary: '#ad2121',
+                        secondary: '#FAE3E3',
+                      }
+    }
+  ];
 
+  
   
 
   constructor(
@@ -34,20 +46,36 @@ export class CitaComponent implements OnInit {
     private datePipe: DatePipe,
     private pipe: DatePipe
   ) { 
-    this.paciente = {
-      identificacion : null
-    }
-
     this.cita = {
-      paciente: this.paciente,
+      id: 100,
+      paciente: {
+        identificacion : null
+      },
+      doctor: {
+        userId         : null,
+        nombres        : null,
+        apellidos      : null,
+        identificacion : null,
+        color: {
+          primary: '#ad2121',
+          secondary: '#FAE3E3',
+        }
+      },
       fecha: null,
       horaInicio : null,
       horaFin: null
     };
 
+    
+
   }
 
   ngOnInit(): void {
+    //Sobreescribe el objeto cita si lo está editando
+    if( this.citaOut ){
+      this.cita = this.citaOut;
+    }
+    console.log(this.cita);
     
   }
 
@@ -57,6 +85,11 @@ export class CitaComponent implements OnInit {
     this.passBack();
   }
 
+  compareDoctor( d1: DoctorModel, d2: DoctorModel ){
+    return d1.identificacion == d2.identificacion;
+
+  }
+
 
   passBack() {
     //this.calendar.start = this.pipe.transform(this.calendar.start, 'yyyy-MM-dd').
@@ -64,7 +97,7 @@ export class CitaComponent implements OnInit {
     
 
 
-    //console.log(this.cita);
+    console.log(this.cita);
 
     
     this.passEntry.emit( this.cita );

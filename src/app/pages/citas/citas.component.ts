@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { CitaModel } from './../../models/Interfaces';
 import { CitaComponent } from './../cita/cita.component';
 import { Component, OnInit,ChangeDetectionStrategy,ViewChild,TemplateRef, } from '@angular/core';
@@ -56,6 +57,57 @@ export class CitasComponent implements OnInit {
     event: CalendarEvent;
   };
 
+  refresh: Subject<any> = new Subject();
+  events: CalendarEvent [] = [];
+  citas: CitaModel[] = [];
+  activeDayIsOpen: boolean = true;
+
+  constructor(
+    private modal    : NgbModal,
+    private datePipe : DatePipe
+    ) {}
+
+  ngOnInit(): void {
+    
+    /*
+    let citaOut = {
+      id: 100,
+      paciente: {
+        identificacion: "1022324440"
+      },
+      doctor: {
+        userId         : null,
+        nombres        : "Carlos Alberto",
+        apellidos      : "Perez",
+        identificacion : "1002251856",
+        color: {
+          primary: '#ad2121',
+          secondary: '#FAE3E3',
+        }
+      },
+      fecha: new Date("2021/05/04") ,
+      horaInicio : "13:00",
+      horaFin:  "14:00",
+    }
+    
+    this.citas = [
+      ...this.citas,
+      citaOut
+    ]
+    this.events = [
+      ...this.events,
+      {
+        id   : 100,
+        title: citaOut.doctor.identificacion,
+        start: new Date("2021/05/04 13:00") ,
+        end: new Date("2021/05/04 14:00") ,
+        color: colors.red,
+        draggable : true
+      },
+    ];
+    */
+    
+  }
 
   
 
@@ -77,57 +129,6 @@ export class CitasComponent implements OnInit {
     },
   ];
 
-  refresh: Subject<any> = new Subject();
-
-  
-
-  events: CalendarEvent [] = [
-    /*
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions,
-    },
-    
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true,
-    },
-    */
-    
-    {
-      start: new Date(),
-      end: addHours(new Date(), 1),
-      title: 'Juan Sebastián Daza',
-      color: colors.blue,
-      draggable: true
-    },
-  ];
-
-  activeDayIsOpen: boolean = true;
-
-  constructor(private modal: NgbModal) {}
-
-  ngOnInit(): void {
-  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -158,21 +159,72 @@ export class CitasComponent implements OnInit {
       }
       return iEvent;
     });
+    
+    event.start = newStart;
+    event.end = newEnd;
     this.handleEvent('Dropped or resized', event);
+    
+    
   }
 
+  /**
+   * Edición de citas y eventos
+   * @param action 
+   * @param event 
+   */
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    
+
+    let idxCita =  this.citas.findIndex( x => x.id == event.id );
+    let idxEvent =  this.citas.findIndex( x => x.id == event.id );
+
+    if( action == "Clicked" )
+    {
+      //Modal para editar la cita
+      const modalCita = this.modal.open( CitaComponent  , {  size: 'lg' });
+      modalCita.componentInstance.citaOut = this.citas[idxCita];
+      modalCita.componentInstance.passEntry.subscribe((cita:CitaModel) => {
+
+        let fIni = this.addHours(cita.fecha , cita.horaInicio);
+        let fFin = this.addHours(cita.fecha , cita.horaFin);
+        this.citas[idxCita] = cita;
+        this.events[idxEvent] = {
+          id        : cita.id,
+          title     : cita.doctor.nombres +" ("+cita.horaInicio+"  - "+ cita.horaFin +") " ,
+          start     : fIni,
+          end       : fFin,
+          color     : cita.doctor.color,
+          draggable : true
+        };
+        modalCita.close();
+      });
+    }
+    else if( action == "Dropped or resized" )
+    {
+      
+      let nuevaHInicio = this.datePipe.transform(event.start, 'H:mm');
+      let nuevaHFin    = this.datePipe.transform(event.end, 'H:mm');
+
+      //Edición arrastrando el evento
+      
+      this.citas[idxCita].fecha      = event.start;
+      this.citas[idxCita].horaInicio = nuevaHInicio;
+      this.citas[idxCita].horaFin    = nuevaHFin;
+      console.log(event.start);
+    }
+    
+
+
+    
+
+    
+    
   }
 
   addEvent(): void {
 
-    
-    
-    //this.modal.open(this.modalContent, { size: 'lg' });
     const modalCita = this.modal.open( CitaComponent  , {  size: 'lg' });
-    //modalCita.componentInstance.cita = null;
+    
     modalCita.componentInstance.passEntry.subscribe((cita:CitaModel) => {
         let fIni = new Date(cita.fecha);
         fIni.setHours( parseInt(cita.horaInicio.split(":")[0]) );
@@ -181,43 +233,30 @@ export class CitasComponent implements OnInit {
         let fFin = new Date(cita.fecha);
         fFin.setHours( parseInt(cita.horaFin.split(":")[0]) );
         fFin.setMinutes( parseInt(cita.horaFin.split(":")[1]) );
-
+      
 
         modalCita.close();
         
+        this.citas = [
+          ...this.citas,
+          cita
+        ]
+
         this.events =[
           ...this.events,
           {
-            title: cita.paciente.identificacion,
-            start: fIni,
-            end: fFin,
-            color: colors.red,
-            draggable: true
+            id        : cita.id,
+            title     : cita.doctor.nombres +" ("+cita.horaInicio+"  - "+ cita.horaFin +") " ,
+            start     : fIni,
+            end       : fFin,
+            color     : cita.doctor.color,
+            draggable : true
           }
         ];
         
-
-        
     })
     
-
-    //this.modal.co
-    /*
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-    */
+    
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
@@ -230,6 +269,14 @@ export class CitasComponent implements OnInit {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  private addHours(fechaIn: Date , hora: string ): Date {
+    let fecha = new Date(fechaIn);
+    fecha.setHours( parseInt(hora.split(":")[0]) );
+    fecha.setMinutes( parseInt(hora.split(":")[1]) );
+    return fecha;
+
   }
 
 

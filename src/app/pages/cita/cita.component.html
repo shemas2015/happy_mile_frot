@@ -13,7 +13,7 @@
 
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Identificacion" type="text" name="identificacion" #identificacion [(ngModel)] = "paciente.identificacion" >
+                                <input matInput placeholder="Identificacion" type="text" name="identificacion" #identificacion [(ngModel)] = "cita.paciente.identificacion" >
                               </mat-form-field>
                             </div>
                             <div class="col-md-8">
@@ -23,10 +23,27 @@
                             </div>
                         </div>
                         <hr>
+
+                        <div class="row">
+                          <div class="col-12">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Seleccione un doctor</mat-label>
+                              <mat-select  [compareWith]="compareDoctor" [(ngModel)]="cita.doctor"   name="doctor"  required>
+                                <mat-option>Seleccion una opción</mat-option>
+                                <mat-option  *ngFor="let d of doctores;" [value] = "d" >
+                                  {{ d.nombres }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            
+
+                          </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                               <mat-form-field class="example-full-width mat-form-field-infix1">
-                                <input matInput [matDatepicker]="picker" placeholder="Choose a date" name="eventDate" [(ngModel)]="cita.fecha " #eventDate="ngModel"
+                                <input matInput [matDatepicker]="picker" placeholder="Seleccione una fecha" name="eventDate" [(ngModel)]="cita.fecha " #eventDate="ngModel"
                                   readonly required>
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
@@ -72,7 +89,7 @@
                                 <ngx-material-timepicker #hora_fin></ngx-material-timepicker>
                               </mat-form-field>
 
-                              {{ cita | json }}
+                              
                             </div>
                         </div>
                     
@@ -84,7 +101,7 @@
   </div>
 
   <div class="modal-footer">
-    <button type="submit" class="btn btn-info">
+    <button type="submit" class="btn btn-info" >
       OK
     </button>
   </div>
