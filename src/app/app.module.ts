@@ -21,6 +21,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -37,6 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    
     
 
   ],

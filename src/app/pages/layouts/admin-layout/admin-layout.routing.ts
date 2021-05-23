@@ -1,3 +1,4 @@
+import { LoginComponent } from './../../login/login.component';
 import { CitasComponent } from './../../citas/citas.component';
 import { Routes } from '@angular/router';
 
@@ -57,5 +58,6 @@ export const AdminLayoutRoutes: Routes = [
 
     /*NEWS!**/
     { path: 'citas',      component: CitasComponent },
+    { path: 'login',      component: LoginComponent },
     
 ];

@@ -30,3 +30,10 @@ export interface CitaModel{
 
 
 
+export interface LoginI{
+    email    : string,
+    password : string
+}
+
+
+

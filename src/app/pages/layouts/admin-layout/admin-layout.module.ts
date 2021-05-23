@@ -1,3 +1,4 @@
+import { LoginComponent } from './../../login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { CitasComponent } from './../../citas/citas.component';
@@ -21,10 +22,10 @@ import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon'
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
   
 
@@ -40,6 +41,9 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    MatIconModule,
+    
+    
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
 
     MatDatepickerModule,
@@ -61,7 +65,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     TableListComponent,
     TypographyComponent,
     CitasComponent,
-    CitaComponent
+    CitaComponent,
+    LoginComponent
     
   ]
 })
