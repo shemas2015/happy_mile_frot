@@ -1,9 +1,12 @@
+import { Router } from '@angular/router';
+import { CitasService } from './../../services/citas.service';
 import { FormGroup } from '@angular/forms';
 import { CitaModel, PacienteModel, DoctorModel } from './../../models/Interfaces';
 import { Component, OnInit, EventEmitter, Output, Injectable, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {DatePipe, formatDate} from '@angular/common';
+import swal from 'sweetalert2';
 
 
 
@@ -25,34 +28,29 @@ export class CitaComponent implements OnInit {
   doctor: DoctorModel;
   
 
-  doctores: DoctorModel[] = [
-    {
-      userId         : null,
-      nombres        : "Carlos Alberto",
-      apellidos      : "Perez",
-      identificacion : "1002251856",
-      color          : {
-                        primary: '#ad2121',
-                        secondary: '#FAE3E3',
-                      }
-    }
-  ];
+  doctores: DoctorModel[] = [];
 
   
-  
-
   constructor(
     public activeModal: NgbActiveModal,
     private datePipe: DatePipe,
-    private pipe: DatePipe
+    private pipe: DatePipe,
+    private citaService: CitasService,
+    private router: Router
   ) { 
+
+    
+    
+    
     this.cita = {
       id: 100,
       paciente: {
-        identificacion : null
+        id : null,
+        identificacion : null,
+        nombres : null,
       },
       doctor: {
-        userId         : null,
+        id            : null,
         nombres        : null,
         apellidos      : null,
         identificacion : null,
@@ -65,24 +63,44 @@ export class CitaComponent implements OnInit {
       horaInicio : null,
       horaFin: null
     };
-
     
-
+    
   }
+
+  form: FormGroup;
 
   ngOnInit(): void {
     //Sobreescribe el objeto cita si lo está editando
     if( this.citaOut ){
       this.cita = this.citaOut;
     }
-    console.log(this.cita);
+    
+    this.citaService.getDoctores().subscribe( (doctores : DoctorModel[] ) => {
+      this.doctores = doctores;
+    } ) ;
     
   }
 
 
   onSubmit( f: FormGroup ) {
+    console.log(this.cita.doctor);
+    this.citaService.crear(this.cita).subscribe(
+      data  => { 
+        swal.fire(
+          '',
+          'Cita creada',
+          'success'
+        )
+        this.passBack();},
+      error => { 
+        swal.fire(
+          'Atención!',
+          'No se pudo crar la cita, contacte al administrador',
+          'error'
+        )
+      }
+      );
     
-    this.passBack();
   }
 
   compareDoctor( d1: DoctorModel, d2: DoctorModel ){
@@ -92,17 +110,37 @@ export class CitaComponent implements OnInit {
 
 
   passBack() {
-    //this.calendar.start = this.pipe.transform(this.calendar.start, 'yyyy-MM-dd').
-    //this.calendar.start = formatDate(this.calendar.start,'yyyy-MM-dd' , 'en-Us');
-    
-
-
-    console.log(this.cita);
-
-    
     this.passEntry.emit( this.cita );
+  }
+
+  consultaPaciente(){
+    const identificacion = this.cita.paciente.identificacion;
     
+    if(identificacion == null ){
+      return;
     }
+    this.citaService.consultaPaciente(identificacion)
+      .subscribe(( data : PacienteModel ) => {
+        if( data["nombres"] !== undefined ){
+          this.cita.paciente = data;
+        }else{
+          this.cita.paciente.nombres = null;
+          swal.fire({
+            title: 'El paciente no existe. ¿Desea crearlo ahora?',
+            showCancelButton: true,
+            confirmButtonText: `Sí`
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              this.router.navigate(['/dashboard']);
+              this.activeModal.dismiss('Cross click')
+            }
+          })
+        }
+
+        
+      });
+  }
     
 
 }

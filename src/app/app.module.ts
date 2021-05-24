@@ -19,6 +19,7 @@ import { AdminLayoutComponent } from './pages/layouts/admin-layout/admin-layout.
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {DatePipe} from '@angular/common';
 
 
 
@@ -43,6 +44,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
   ],
   providers: [
+    DatePipe,
     {
       provide: MatDialogRef,
       useValue: {}

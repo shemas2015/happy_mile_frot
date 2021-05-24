@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../../guards/auth.guard';
 import { LoginComponent } from './../../login/login.component';
 import { CitasComponent } from './../../citas/citas.component';
 import { Routes } from '@angular/router';
@@ -57,7 +58,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'typography',     component: TypographyComponent },
 
     /*NEWS!**/
-    { path: 'citas',      component: CitasComponent },
+    { path: 'citas',      component: CitasComponent, canActivate: [ AuthGuard ] },
     { path: 'login',      component: LoginComponent },
+    
     
 ];

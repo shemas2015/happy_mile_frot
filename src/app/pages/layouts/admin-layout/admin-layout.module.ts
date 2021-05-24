@@ -55,7 +55,6 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
   ],
 
   providers:[
-    
     DatePipe
   ],
   

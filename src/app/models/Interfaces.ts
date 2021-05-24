@@ -2,13 +2,14 @@ import { Time } from '@angular/common';
 import {CalendarEvent} from 'angular-calendar';
 
 export interface PacienteModel{
+    id             : number;
     identificacion : string;
     nombres?       : string;
     apellidos?     : string;
 }
 
 export interface DoctorModel{
-    userId         : number;
+    id             : number;
     nombres        : string;
     apellidos      : string;
     identificacion : string;

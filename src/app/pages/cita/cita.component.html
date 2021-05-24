@@ -13,18 +13,26 @@
 
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Identificacion" type="text" name="identificacion" #identificacion [(ngModel)] = "cita.paciente.identificacion" >
+                                <input 
+                                matInput placeholder="Identificacion" 
+                                type="text" name="identificacion" 
+                                autocomplete="off"
+                                #identificacion 
+                                [(ngModel)] = "cita.paciente.identificacion" 
+                                (change)="consultaPaciente()"
+                                
+                                >
                               </mat-form-field>
                             </div>
                             <div class="col-md-8">
                               <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Nombres y Apellidos del paciente" disabled>
+                                  <input matInput placeholder="Nombres y Apellidos del paciente" name="nombres" [(ngModel)] = "cita.paciente.nombres" readonly >
                                 </mat-form-field>
                             </div>
                         </div>
                         <hr>
-
-                        <div class="row">
+                        
+                        <div class="row" *ngIf="cita.paciente.nombres !== null" >
                           <div class="col-12">
                             <mat-form-field appearance="fill">
                               <mat-label>Seleccione un doctor</mat-label>
@@ -40,7 +48,7 @@
                           </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" *ngIf="cita.paciente.nombres !== null">
                             <div class="col-md-12">
                               <mat-form-field class="example-full-width mat-form-field-infix1">
                                 <input matInput [matDatepicker]="picker" placeholder="Seleccione una fecha" name="eventDate" [(ngModel)]="cita.fecha " #eventDate="ngModel"
@@ -53,7 +61,7 @@
                             
                         </div>
                         
-                        <div class="row">
+                        <div class="row" *ngIf="cita.paciente.nombres !== null">
                             <div class="col-md-6">
                               <mat-form-field class="example-full-width">
                                 <input matInput  
@@ -101,7 +109,12 @@
   </div>
 
   <div class="modal-footer">
-    <button type="submit" class="btn btn-info" >
+    <button type="button" class="btn btn-outline-dark" 
+      (click)="activeModal.dismiss('Cross click')" >
+        Close</button>
+
+    <button type="submit" class="btn btn-info" 
+       [disabled] ="cita.paciente.nombres === null">
       OK
     </button>
   </div>

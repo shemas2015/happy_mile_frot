@@ -1,3 +1,4 @@
+import { CitasService } from './../../services/citas.service';
 import { DatePipe } from '@angular/common';
 import { CitaModel } from './../../models/Interfaces';
 import { CitaComponent } from './../cita/cita.component';
@@ -64,49 +65,12 @@ export class CitasComponent implements OnInit {
 
   constructor(
     private modal    : NgbModal,
-    private datePipe : DatePipe
+    private datePipe : DatePipe,
+    private citasService: CitasService
     ) {}
 
   ngOnInit(): void {
-    
-    /*
-    let citaOut = {
-      id: 100,
-      paciente: {
-        identificacion: "1022324440"
-      },
-      doctor: {
-        userId         : null,
-        nombres        : "Carlos Alberto",
-        apellidos      : "Perez",
-        identificacion : "1002251856",
-        color: {
-          primary: '#ad2121',
-          secondary: '#FAE3E3',
-        }
-      },
-      fecha: new Date("2021/05/04") ,
-      horaInicio : "13:00",
-      horaFin:  "14:00",
-    }
-    
-    this.citas = [
-      ...this.citas,
-      citaOut
-    ]
-    this.events = [
-      ...this.events,
-      {
-        id   : 100,
-        title: citaOut.doctor.identificacion,
-        start: new Date("2021/05/04 13:00") ,
-        end: new Date("2021/05/04 14:00") ,
-        color: colors.red,
-        draggable : true
-      },
-    ];
-    */
-    
+    this.getEvents();
   }
 
   
@@ -277,6 +241,26 @@ export class CitasComponent implements OnInit {
     fecha.setMinutes( parseInt(hora.split(":")[1]) );
     return fecha;
 
+  }
+
+
+  private getEvents(){
+    this.citasService.getCitas()
+    .subscribe((citas:CitaModel[]) => {
+
+      for (let i = 0; i < citas.length; i++) {
+        console.log(citas[i]);
+        this.events[citas[i].id] = {
+          id        : citas[i].id,
+          title     : citas[i].doctor.nombres +" ("+citas[i].horaInicio+"  - "+ citas[i].horaFin +") " ,
+          start     : new Date(),
+          end       : new Date(),
+          color     : citas[i].doctor.color,
+          draggable : true
+        };
+      }
+
+    });
   }
 
 
