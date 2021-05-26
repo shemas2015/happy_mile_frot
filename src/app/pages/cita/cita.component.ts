@@ -33,10 +33,9 @@ export class CitaComponent implements OnInit {
   
   constructor(
     public activeModal: NgbActiveModal,
-    private datePipe: DatePipe,
-    private pipe: DatePipe,
     private citaService: CitasService,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
   ) { 
 
     
@@ -70,9 +69,18 @@ export class CitaComponent implements OnInit {
   form: FormGroup;
 
   ngOnInit(): void {
+    
     //Sobreescribe el objeto cita si lo está editando
     if( this.citaOut ){
       this.cita = this.citaOut;
+
+
+      var tmpDateIni = new Date(this.cita.fecha+'T'+this.cita.horaInicio)
+      var tmpDateFin = new Date(this.cita.fecha+'T'+this.cita.horaFin)
+
+      this.cita.horaInicio = this.datePipe.transform(tmpDateIni,'H:mm')
+      this.cita.horaFin = this.datePipe.transform(tmpDateFin,'H:mm')
+      console.log(this.cita);
     }
     
     this.citaService.getDoctores().subscribe( (doctores : DoctorModel[] ) => {
@@ -83,7 +91,7 @@ export class CitaComponent implements OnInit {
 
 
   onSubmit( f: FormGroup ) {
-    console.log(this.cita.doctor);
+    
     this.citaService.crear(this.cita).subscribe(
       data  => { 
         swal.fire(
@@ -100,10 +108,12 @@ export class CitaComponent implements OnInit {
         )
       }
       );
-    
   }
 
   compareDoctor( d1: DoctorModel, d2: DoctorModel ){
+    if ( d2 == null ){
+      return false;
+    }
     return d1.identificacion == d2.identificacion;
 
   }
