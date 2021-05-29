@@ -66,6 +66,26 @@ export class CitasService {
 
 
   /**
+   * Crea una nueva cita
+   * @param cita 
+   * @returns 
+   */
+   editar(cita: CitaModel){
+    const formData = {
+      'id'          : cita.id,
+      'fecha'       : this.datePipe.transform(cita.fecha,"yyyy-MM-dd") ,
+      'doctor'      : cita.doctor.id,
+      'paciente'    : cita.paciente.id,
+      'hora_inicio' : cita.horaInicio,
+      'hora_fin'    : cita.horaFin
+    }
+    return this.http.post( 
+      this.url+"/api/crearCita" , formData , 
+      this.getHeaders() );
+  }
+
+
+  /**
    * Consulta las citas activas
    */
   getCitas(){

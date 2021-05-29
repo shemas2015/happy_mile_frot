@@ -18,7 +18,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar'
-
+import swal from 'sweetalert2';
 
 const colors: any = {
   red: {
@@ -178,7 +178,26 @@ export class CitasComponent implements OnInit {
       this.citas[idxCita].fecha      = event.start
       this.citas[idxCita].horaInicio = nuevaHInicio
       this.citas[idxCita].horaFin    = nuevaHFin
-      console.log(event.start)
+      
+      this.citasService.editar( this.citas[idxCita] ).subscribe(
+        data  => { 
+          swal.fire(
+            '',
+            'Cita editada',
+            'success'
+          );
+          },
+        error => { 
+          swal.fire(
+            'Atención!',
+            'No se pudo crear la cita, contacte al administrador',
+            'error'
+          )
+        }
+        );
+      
+      console.log(this.citas[idxCita])
+      console.log("Im yours");
     }
     
 
@@ -209,7 +228,7 @@ export class CitasComponent implements OnInit {
           ...this.citas,
           cita
         ]
-        console.log(this.events)
+        
         this.events =[
           ...this.events,
           {
@@ -221,7 +240,7 @@ export class CitasComponent implements OnInit {
             draggable : true
           }
         ]
-        console.log(this.events)
+        
         
     })
     

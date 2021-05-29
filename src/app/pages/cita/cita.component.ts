@@ -91,23 +91,45 @@ export class CitaComponent implements OnInit {
 
 
   onSubmit( f: FormGroup ) {
+    //El parámetro paciente_id ,  viaja en la petición de cada consulta de las citas desde 
+    //la db,si está definido quiere decir que el registo existe y se debe editar
+    //IMPORTANTE! no retirarlo en la petición del front
+    if( this.cita["paciente_id"] === undefined ){
+      this.citaService.crear(this.cita).subscribe(
+        data  => { 
+          swal.fire(
+            '',
+            'Cita creada',
+            'success'
+          )
+          this.passBack();},
+        error => { 
+          swal.fire(
+            'Atención!',
+            'No se pudo crear la cita, contacte al administrador',
+            'error'
+          )
+        }
+        );
+    }else{
+      this.citaService.editar(this.cita).subscribe(
+        data  => { 
+          swal.fire(
+            '',
+            'Cita editada',
+            'success'
+          )
+          this.passBack();},
+        error => { 
+          swal.fire(
+            'Atención!',
+            'No se pudo editar la cita, contacte al administrador',
+            'error'
+          )
+        }
+        );
+    }
     
-    this.citaService.crear(this.cita).subscribe(
-      data  => { 
-        swal.fire(
-          '',
-          'Cita creada',
-          'success'
-        )
-        this.passBack();},
-      error => { 
-        swal.fire(
-          'Atención!',
-          'No se pudo crar la cita, contacte al administrador',
-          'error'
-        )
-      }
-      );
   }
 
   compareDoctor( d1: DoctorModel, d2: DoctorModel ){
