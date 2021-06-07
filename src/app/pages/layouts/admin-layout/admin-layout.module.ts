@@ -1,3 +1,5 @@
+import { PacientesComponent } from './../../../pacientes/pacientes.component';
+import { DoctoresComponent } from './../../../doctores/doctores.component';
 import { LoginComponent } from './../../login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -19,7 +21,7 @@ import { TypographyComponent } from '../../typography/typography.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatError, MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon'
@@ -27,7 +29,8 @@ import { MatIconModule } from '@angular/material/icon'
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-  
+import { MatTableModule } from '@angular/material/table'  
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -49,7 +52,10 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatDatepickerModule,
     MatNativeDateModule, 
     NgbModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MatTableModule,
+    MatSlideToggleModule
+    
     
     
   ],
@@ -65,7 +71,9 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     TypographyComponent,
     CitasComponent,
     CitaComponent,
-    LoginComponent
+    LoginComponent,
+    DoctoresComponent,
+    PacientesComponent
     
   ]
 })

@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { CitaModel } from './../models/Interfaces';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -93,5 +94,31 @@ export class CitasService {
       this.url+"/api/getCitas" , {} , 
       this.getHeaders() );
   }
+
+  getCamposHistoria(){
+    return this.http.get( 
+      this.url+"/api/getHistoria" , 
+      this.getHeaders() );
+  }
+
+
+  crearPaciente( form: FormGroup ){
+    const data = form.value;
+    data["fecha_nacimiento"] = this.datePipe.transform(data["fecha_nacimiento"],"yyyy-MM-dd");
+    return this.http.post( 
+      this.url+"/api/crearPaciente" , data , 
+      this.getHeaders() );
+
+  }
+
+
+  getHistriaClinica(identificacion: string){
+    return this.http.post( 
+      this.url+"/api/getHistoriaPaciente" , {"identificacion" : identificacion} , 
+      this.getHeaders() );
+
+  }
+
+
   
 }
