@@ -1,4 +1,4 @@
-import { PacientesComponent } from './../../../pacientes/pacientes.component';
+import { PacientesComponent } from '../../pacientes/pacientes.component';
 import { DoctoresComponent } from './../../../doctores/doctores.component';
 import { LoginComponent } from './../../login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +20,7 @@ import { TypographyComponent } from '../../typography/typography.component';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
 import {MatError, MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -45,6 +46,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatSelectModule,
     MatTooltipModule,
     MatIconModule,
+    MatTabsModule,
+    
+    
     
     
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),

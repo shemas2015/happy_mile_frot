@@ -1,0 +1,260 @@
+<div class="main-content">
+    <div class="card">
+        <div class="card-header card-header-info">
+            <h4 class="card-title ">Pacientes</h4>
+            <p class="card-category"> Administración de pacientes</p>
+        </div>
+        
+        <div class="card-body">
+            <form [formGroup] = "forma" (ngSubmit)="guardar()" >
+                <div class="row paciente_id">
+                    <div class="col-4">
+                        <mat-form-field>
+                            <mat-placeholder>Identificación</mat-placeholder>
+                            <input matInput 
+                            type="search"
+                            autocomplete="off"
+                            formControlName="identificacion"
+                            >
+                            <button type="button" mat-button matSuffix mat-stroked-button aria-label="search" (click)="validaPaciente()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        
+                    </div>
+                    <div class="col-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput 
+                            placeholder="Nombres" 
+                            autocomplete="off"
+                            formControlName="nombres"
+                            >
+                        </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                        <mat-form-field class="example-full-width">
+                            <input 
+                            matInput 
+                            placeholder="Apellidos" 
+                            formControlName="apellidos"
+                            autocomplete="off">
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                <div class="datos_personales" *ngIf="verDatosP" >
+                    <hr>
+                    <h5>Datos Personales</h5>
+                    <div class="row">
+                        <div class="col-3"> 
+                            <mat-form-field >
+                                <mat-label>Sexo</mat-label>
+                                <mat-select 
+                                formControlName="sexo"
+                                name="sexo"
+                                >
+                                <mat-option *ngFor="let sexo of  ['M','F'] " [value]="sexo">
+                                    {{ sexo }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">  
+                        <mat-form-field >
+                            <mat-label>Tipo Doc.</mat-label>
+                            <mat-select formControlName="tipo_documento" name="tipo_documento" >
+                                <mat-option *ngFor="let tipo_documento of  ['RC','TI','CE','CC'] " [value]="tipo_documento">
+                                    {{ tipo_documento }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">  
+                        <mat-form-field>
+                            <mat-label>Fecha de Nacimiento</mat-label>
+                            <input 
+                            matInput 
+                            [matDatepicker]="picker"
+                            autocomplete="off"
+                            formControlName="fecha_nacimiento"
+                            >
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field>
+                            <mat-label>Lugar de nacimiento</mat-label>
+                            <input matInput 
+                            placeholder="Lugar de Nacimiento"
+                            autocomplete="off"
+                            formControlName="lugar_nacimiento"
+                            >
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        
+                        <mat-form-field>
+                            <mat-label>Dirección</mat-label>
+                            <input matInput 
+                            placeholder="Dirección de residencia"
+                            autocomplete="off"
+                            formControlName="direccion"
+                            >
+                        </mat-form-field>
+                        
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field>
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput type="number" 
+                            placeholder="Teléfono fijo"
+                            autocomplete="off"
+                            formControlName="telefono"
+                            >
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6"> 
+                        <mat-form-field>
+                            <mat-label>Celular</mat-label>
+                            <input matInput type="number" 
+                            placeholder="Número de celular"
+                            autocomplete="off"
+                            formControlName="celular"
+                            >
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-4">
+                        <mat-form-field>
+                            <mat-label>Ocupación</mat-label>
+                            <input matInput 
+                            placeholder="Ocupación"
+                            formControlName="ocupacion"
+                            autocomplete="off"
+                            >
+                        </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                        
+                        <mat-form-field>
+                            <mat-label>Estado Civil.</mat-label>
+                            <mat-select formControlName="estado_civil">
+                                <mat-option *ngFor="let estado_civil of  ['Soltero','Casado','Divorciado','Unión Libre'] " [value]="estado_civil">
+                                    {{ estado_civil }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        
+                        
+                    </div>
+                    <div class="col-4">
+                        <mat-form-field>
+                            <mat-label>EPS</mat-label>
+                            <input matInput 
+                            formControlName="eps"
+                            placeholder="EPS"
+                            autocomplete="off"
+                            >
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-12">
+                        <mat-form-field>
+                            <mat-label>Motivo de la consulta</mat-label>
+                            <textarea 
+                            matInput 
+                            placeholder="Motivo de la consulta"
+                            formControlName="motivo_consulta"
+                            ></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                
+                <mat-tab-group mat-align-tabs="start">
+                    <mat-tab label="Antecedentes Médicos">
+                        <div class="row" *ngIf="forma" >
+                            <table class="table">
+                                <tbody>
+                                    <tr *ngFor="let tr of dataTable">
+                                        <td> {{ tr.col_1 }} </td>
+                                        <td> 
+                                            <mat-slide-toggle [formControlName]="tr.opc_1" [id] ="tr.opc_1" > 
+                                            </mat-slide-toggle>
+                                        </td>
+                                        <td> {{ tr.col_2 }} </td>
+                                        <td> 
+                                            <mat-slide-toggle 
+                                            *ngIf="tr.col_2 !== null" 
+                                            formControlName="{{tr.opc_2}}"
+                                            > </mat-slide-toggle>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Valoración">
+                        <mat-form-field>
+                            <mat-label>Digite la valoración</mat-label>
+                            <textarea matInput 
+                                placeholder="Describa el estado actual del paciente"
+                                formControlName="valoracion"
+                                >
+                            </textarea>
+                          </mat-form-field>
+
+                          <!--Histórico de valoraciones-->
+                          <table mat-table [dataSource]="paciente.valoraciones" class="mat-elevation-z8">
+                            <ng-container matColumnDef="fecha">
+                              <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                              <td mat-cell *matCellDef="let element"> {{element.created_at | date :'shortDate' }} </td>
+                            </ng-container>
+                          
+                            <ng-container matColumnDef="valoracion">
+                              <th mat-header-cell *matHeaderCellDef> Valoración </th>
+                              <td mat-cell *matCellDef="let element"> {{element.valoracion}} </td>
+                            </ng-container>
+                          
+                          
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                          </table>
+
+                    </mat-tab>
+                    <mat-tab label="Odontograma">Content 3</mat-tab>
+                    <mat-tab label="Diagnóstico">Content 4</mat-tab>
+                    <mat-tab label="Evoluciones">Content 5</mat-tab>
+                </mat-tab-group>
+                
+                <button mat-raised-button type="submit" class="btn btn-info pull-right">
+                    Guardar
+                </button>
+                
+                
+                
+                
+                <div class="clearfix"></div>
+                
+            </div>
+        </form>
+        
+        
+    </div>
+</div>
+</div>
+
+

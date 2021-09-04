@@ -1,4 +1,4 @@
-import { PacientesComponent } from './../../../pacientes/pacientes.component';
+import { PacientesComponent } from '../../pacientes/pacientes.component';
 import { PacienteModel } from './../../../models/Interfaces';
 import { DoctoresComponent } from './../../../doctores/doctores.component';
 import { AuthGuard } from './../../../guards/auth.guard';

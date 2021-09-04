@@ -33,7 +33,7 @@ export class CitasService {
    * @returns 
    */
   public consultaPaciente( identificacion: String ) {
-    return this.http.post( this.url+"/api/getPaciente" ,{'identificacion' : identificacion} , this.getHeaders() );
+    return this.http.get( `${this.url}/api/getPaciente/${identificacion}`  , this.getHeaders() );
   }
 
 

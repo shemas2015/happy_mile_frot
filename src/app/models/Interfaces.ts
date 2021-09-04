@@ -1,9 +1,16 @@
 import { Time } from '@angular/common';
 import {CalendarEvent} from 'angular-calendar';
 
+
+export interface ValoracionModel{
+    created_at : Date;
+    valoracion : string;
+}
+
 export interface PacienteModel{
     id                : number;
     identificacion    : string;
+    valoraciones      : ValoracionModel[];
     nombres?          : string;
     apellidos?        : string;
     fecha_nacimiento? : string;

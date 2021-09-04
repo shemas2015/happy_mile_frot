@@ -1,10 +1,12 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { CitasService } from './../services/citas.service';
+import { CitasService } from '../../services/citas.service';
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
 import { PacienteModel } from 'app/models/Interfaces';
 
 import { Subscription } from 'rxjs';
+
+
 
 
 
@@ -21,6 +23,9 @@ export class PacientesComponent implements OnInit {
   paciente  : PacienteModel;
   forma     : FormGroup;
   myFormGroupSubs:Subscription;  
+
+  displayedColumns: string[] = ['fecha', 'valoracion'];
+  
 
   constructor(
     private citasService : CitasService,
@@ -50,6 +55,7 @@ export class PacientesComponent implements OnInit {
       estado_civil     : [],
       eps              : [ '' , Validators.required],
       motivo_consulta  : [ '' , Validators.required],
+      valoracion       : [ '' ],
     };
 
     this.forma = this.formBuilder.group(formFields);
@@ -144,13 +150,7 @@ export class PacientesComponent implements OnInit {
 
                   this.forma.controls[keys[index]].setValue(  data[keys[index]] );
               }
-              
-              
             }
-            
-
-              
-              
             
           }); 
         }
@@ -160,9 +160,10 @@ export class PacientesComponent implements OnInit {
     })
   }
 
-
+  /**
+   * Almacena cambios en un paciente
+   */
   public guardar(){
-    
     this.forma.markAllAsTouched();
     if( this.forma.invalid ){
       swal.fire({
@@ -171,15 +172,14 @@ export class PacientesComponent implements OnInit {
         text:   'Verifique los campos obligatorios'
       })
     }else{
-      
-      
       this.citasService.crearPaciente(this.forma)
-        .subscribe(
-          data => {
+        .subscribe((data:PacienteModel) => {
+            this.paciente = data;
             swal.fire({
               icon: 'success',
               text: 'Registro almacenado correctamente'
-            })
+            });
+            this.forma.get("valoracion").setValue("");
           },
           error => {
             swal.fire({
