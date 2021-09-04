@@ -10,7 +10,7 @@ export interface ValoracionModel{
 export interface PacienteModel{
     id                : number;
     identificacion    : string;
-    valoraciones      : ValoracionModel[];
+    valoraciones?     : ValoracionModel[];
     nombres?          : string;
     apellidos?        : string;
     fecha_nacimiento? : string;

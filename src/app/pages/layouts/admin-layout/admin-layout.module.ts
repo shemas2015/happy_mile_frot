@@ -32,6 +32,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatTableModule } from '@angular/material/table'  
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { OdontogramaComponent } from 'app/pages/pacientes/odontograma/odontograma.component';
 
 @NgModule({
   imports: [
@@ -47,10 +48,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatTooltipModule,
     MatIconModule,
     MatTabsModule,
-    
-    
-    
-    
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
 
     MatDatepickerModule,
@@ -77,7 +74,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     CitaComponent,
     LoginComponent,
     DoctoresComponent,
-    PacientesComponent
+    PacientesComponent,
+    OdontogramaComponent
     
   ]
 })
