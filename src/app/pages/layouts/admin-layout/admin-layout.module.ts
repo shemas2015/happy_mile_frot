@@ -33,6 +33,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatTableModule } from '@angular/material/table'  
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { OdontogramaComponent } from 'app/pages/odontograma/odontograma.component';
+import { DienteComponent } from 'app/pages/odontograma/diente/diente.component';
 
 @NgModule({
   imports: [
@@ -75,7 +76,8 @@ import { OdontogramaComponent } from 'app/pages/odontograma/odontograma.componen
     LoginComponent,
     DoctoresComponent,
     PacientesComponent,
-    OdontogramaComponent
+    OdontogramaComponent,
+    DienteComponent
     
   ]
 })

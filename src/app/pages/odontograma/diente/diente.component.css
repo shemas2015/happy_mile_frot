@@ -1,0 +1,15 @@
+
+.diente{
+    height: 200px;
+}
+.diente > svg{
+    position: absolute;
+    height: 50px;
+    
+}
+
+.diente > svg > path , .diente > svg > ellipse  {
+    stroke: green;
+    fill: green;
+}
+

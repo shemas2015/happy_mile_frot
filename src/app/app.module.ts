@@ -20,7 +20,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
-import { OdontogramaComponent } from './pages/odontograma/odontograma.component';
+
 
 
 
