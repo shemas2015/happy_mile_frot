@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DienteModel } from 'app/models/Interfaces';
 import { ar } from 'date-fns/locale';
+import { DienteComponent } from './diente/diente.component';
 
 @Component({
   selector: 'app-odontograma',
@@ -10,7 +13,9 @@ export class OdontogramaComponent implements OnInit {
 
   private grupos = new Array(8) ;
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.grupos[0] = this.range(11,18 , true);
@@ -22,8 +27,6 @@ export class OdontogramaComponent implements OnInit {
     this.grupos[6] = this.range(71,75 , false);
     this.grupos[7] = this.range(31,38 , false);
 
-    console.log(this.grupos);
-
     
   }
 
@@ -34,16 +37,39 @@ export class OdontogramaComponent implements OnInit {
    * @param reverse true retorna arreglo descendente
    * @returns 
    */
-  range(j, k , reverse: boolean ) { 
+  range(j:number, k:number , reverse: boolean )  { 
     const arr =  Array
         .apply(null, Array((k - j) + 1))
-        .map(function(_, n){ return n + j; })
+        .map( (_, n): DienteModel  =>  { 
+          const diente: DienteModel = {
+            numero: (n + j)
+          }; 
+          return  diente; 
+        })
          ; 
       if ( reverse ){
         return arr.slice().reverse();
       }else{
         return arr
       }
+  }
+
+  /**
+   * Abre modal y envía el objeto diente 
+   * @param diente 
+   */
+  abrirModal( diente:DienteModel ){
+    const dialogRef = this.dialog.open( DienteComponent , {
+      width: '250px',
+      data: {diente: diente, min: false }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+
+    
   }
 
 }

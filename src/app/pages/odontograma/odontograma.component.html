@@ -1,32 +1,40 @@
 
-<h1>tes</h1>
-<app-diente></app-diente>
-<h1>tes2</h1>
+<div class="row mt-3">
+    <div class="col-6 d-flex justify-content-end">
+        <app-diente *ngFor="let item of grupos[0]" [diente]="item" (click)="abrirModal(item)" ></app-diente>
+    </div>
+    <div class="col-6">
+        <app-diente *ngFor="let item of grupos[2]" [diente]="item" (click)="abrirModal(item)"  ></app-diente>
+    </div>
+</div>
 
-<!--
-<table class="table odonto-table">
-    <tbody>
-        <tr>
-            <td class="text-center">
-                
-                {{ grupos[0] | json }}
-                {{ grupos[1] | json }}
-            </td>
-            <td class="text-center">
-                {{ grupos[2] | json }}
-                {{ grupos[3] | json }}
-            </td>
-        </tr>
-        <tr>
-            <td class="text-center">
-                {{ grupos[4] | json }}
-                {{ grupos[5] | json }}
-            </td>
-            <td class="text-center">
-                {{ grupos[6] | json }}
-                {{ grupos[7] | json }}
-            </td>
-        </tr>
-    </tbody>
-</table>
--->
+<div class="row">
+    <div class="col-6 d-flex justify-content-end">
+        <app-diente *ngFor="let item of grupos[1]" [diente]="item" (click)="abrirModal(item)"  ></app-diente>
+    </div>
+    <div class="col-6">
+        <app-diente *ngFor="let item of grupos[3]" [diente]="item" (click)="abrirModal(item)"  ></app-diente>
+    </div>
+</div>
+
+<hr>
+
+
+<div class="row">
+    <div class="col-6 d-flex justify-content-end ">
+        <app-diente *ngFor="let item of grupos[4]" [diente]="item" (click)="abrirModal(item)"  ></app-diente>
+    </div>
+    <div class="col-6">
+        <app-diente *ngFor="let item of grupos[6]" [diente]="item" (click)="abrirModal(item)"  ></app-diente>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6  d-flex justify-content-end">
+        <app-diente *ngFor="let item of grupos[5]" [diente]="item" (click)="abrirModal(item)"  ></app-diente>
+    </div>
+    <div class="col-6">
+        <app-diente *ngFor="let item of grupos[7]" [diente]="item" (click)="abrirModal(item)"  ></app-diente>
+    </div>
+</div>
+

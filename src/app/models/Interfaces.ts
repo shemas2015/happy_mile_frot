@@ -51,11 +51,19 @@ export interface CitaModel{
 }
 
 
-
 export interface LoginI{
     email    : string,
     password : string
 }
 
+export interface DienteModel{
+    numero      : number;
+    vestibular? : string;
+    mesial?     : string;
+    palatino?   : string;
+    distal?     : string; 
+    oclusal?    : string; 
+
+}
 
 
