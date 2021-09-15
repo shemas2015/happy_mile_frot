@@ -8,24 +8,69 @@
 }
 
 .d_container {
-    width: 35px;
-    height: 35px;
     position: relative;
     float: left;
 }
 
-.d_container > svg{
+.d_container_min_size{
+    width: 35px;
+    height: 35px;
+}
+
+.d_container_md_size{
+    width: 300px;
+    height: 300px;
+}
+
+.d_container > svg , .d_container > img {
     position: absolute;        
+}
+
+.d_container > img{
+    max-width: 100%;
 }
 
 
 
 /* COLORS */
+
+.caries{
+    stroke    : #AA2B28;
+    fill      : #AA2B28;
+}
+
+.obturado{
+    stroke    : #143A7F;
+    fill      : #143A7F;
+}
+
 .d_fill_color {
     stroke: #A6ACAF;
     fill: #A6ACAF;
 }
-.caries{
-    stroke: red;
-    fill: red;
+#container {
+    width: 100px;
+    height: 30px;
+    position: relative;
+}
+#navi,#infoi {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#infoi {
+    z-index: 10;
+}
+#container{
+    font-size: 12px;
+    margin: 3px;
+}
+#container > div > img{
+    height: 32px;
+    width: 32px;
+}
+
+
+.icons > .row > .col-1 ,.icons > .row > .col-3 {
+    cursor: pointer;
 }

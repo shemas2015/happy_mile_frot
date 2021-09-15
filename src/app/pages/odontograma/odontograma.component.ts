@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DienteModel } from 'app/models/Interfaces';
 import { ar } from 'date-fns/locale';
@@ -11,7 +11,10 @@ import { DienteComponent } from './diente/diente.component';
 })
 export class OdontogramaComponent implements OnInit {
 
-  private grupos = new Array(8) ;
+  grupos = new Array(8);
+  @Output() refresh = new EventEmitter<DienteModel[]>();
+  @Input() dientes   : DienteModel[];
+
 
   constructor(
     public dialog: MatDialog
@@ -41,10 +44,16 @@ export class OdontogramaComponent implements OnInit {
     const arr =  Array
         .apply(null, Array((k - j) + 1))
         .map( (_, n): DienteModel  =>  { 
-          const diente: DienteModel = {
-            numero: (n + j)
-          }; 
-          return  diente; 
+          const dtTmp = this.searchDiente( n + j );
+          
+          if( dtTmp !== undefined ){
+            return  dtTmp;
+          }else{
+            return  {
+              numero: (n + j)
+            }; 
+          }
+          
         })
          ; 
       if ( reverse ){
@@ -54,22 +63,39 @@ export class OdontogramaComponent implements OnInit {
       }
   }
 
+
+  private searchDiente( numero:number ){
+    return this.dientes.find(dt => dt.numero == numero);
+  }
+
   /**
    * Abre modal y envía el objeto diente 
    * @param diente 
    */
   abrirModal( diente:DienteModel ){
     const dialogRef = this.dialog.open( DienteComponent , {
-      width: '250px',
+      width: '600px',
+      height: '90%',
       data: {diente: diente, min: false }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      //this.animal = result;
+      const arr = [];
+      for (let i = 0; i < this.grupos.length; i++) {
+        for (let j = 0; j < this.grupos[i].length; j++) {
+          arr.push( this.grupos[i][j] );
+
+        }
+        
+      }
+      
+      this.refresh.emit(arr);
     });
 
     
   }
+
+
+  
 
 }

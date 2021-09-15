@@ -2,7 +2,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { CitasService } from '../../services/citas.service';
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2';
-import { PacienteModel } from 'app/models/Interfaces';
+import { PacienteModel, DienteModel } from 'app/models/Interfaces';
 
 import { Subscription } from 'rxjs';
 
@@ -18,13 +18,13 @@ import { Subscription } from 'rxjs';
 })
 
 export class PacientesComponent implements OnInit {
-  dataTable : any = [];
-  verDatosP : boolean = false;
-  paciente  : PacienteModel;
-  forma     : FormGroup;
-  myFormGroupSubs:Subscription;  
-
-  displayedColumns: string[] = ['fecha', 'valoracion'];
+  dataTable         : any = [];
+  verDatosP         : boolean = false;
+  paciente          : PacienteModel;
+  forma             : FormGroup;
+  myFormGroupSubs   : Subscription;
+  displayedColumns  : string[] = ['fecha', 'valoracion'];
+  private dientes   : DienteModel[];
   
 
   constructor(
@@ -107,6 +107,7 @@ export class PacientesComponent implements OnInit {
     this.citasService.consultaPaciente(id)
       .subscribe( ( paciente:PacienteModel ) => {
         
+        
         if ( paciente.identificacion == undefined  ){
           swal.fire({
             title: 'El paciente no existe. ¿Desea crearlo ahora?',
@@ -114,7 +115,7 @@ export class PacientesComponent implements OnInit {
             confirmButtonText: `Sí`
           }).then((result) => {
             if (result.isConfirmed) {
-              this.verDatosP = true;
+              this.verDatosP = true;              
             }
           })
         }else{
@@ -132,7 +133,7 @@ export class PacientesComponent implements OnInit {
           this.forma.controls['ocupacion'].setValue( this.paciente.ocupacion);
           this.forma.controls['estado_civil'].setValue( this.paciente.estado_civil);
           this.forma.controls['eps'].setValue( this.paciente.eps);
-          
+
           //this.form.controls['acompañante'].setValue( this.paciente.acompañante);
           //this.form.controls['parentezco'].setValue( this.paciente.parentezco);
           //this.form.controls['celular_acom'].setValue( this.paciente.celular_acom);
@@ -165,14 +166,14 @@ export class PacientesComponent implements OnInit {
    */
   public guardar(){
     this.forma.markAllAsTouched();
-    if( this.forma.invalid ){
+    if( this.forma.invalid  ){
       swal.fire({
         icon:   'error',
         title:  'Atención',
         text:   'Verifique los campos obligatorios'
       })
     }else{
-      this.citasService.crearPaciente(this.forma)
+      this.citasService.crearPaciente(this.forma , this.dientes )
         .subscribe((data:PacienteModel) => {
             this.paciente = data;
             swal.fire({
@@ -191,6 +192,15 @@ export class PacientesComponent implements OnInit {
         );
     }
   }
+
+  /**
+   * Carga el arreglo de dientes
+   * @param e 
+   */
+  setDientes( e:DienteModel[] ){
+    this.dientes = e;
+  }
+
 
 
 

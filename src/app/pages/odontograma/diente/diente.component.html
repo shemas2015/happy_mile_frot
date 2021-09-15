@@ -1,44 +1,204 @@
-<div  class="d_container_gen mr-1 ml-1">
-    <div class="d_container" >
-        <svg
-            viewBox="0 0 135 135">
-            <path 
-            [class]="(diente.vestibular !== undefined ) ? diente.vestibular : 'd_fill_color'" 
-            id="path2709" style="stroke-width:34.9999;stroke-miterlimit:4;stroke-dasharray:none"
-            d="m 33.997165,32.188799 a 47.942116,47.942134 0 0 1 33.900193,-14.04193 47.942116,47.942134 0 0 1 33.900592,14.04231" />
-            </svg>
-        <svg viewBox="0 0 135 135" >
-                <path [class]="(diente.mesial !== undefined ) ? diente.mesial : 'd_fill_color'" 
-                    id="path2714" style="fill:#e6e6e6;stroke-width:34.9999;stroke-miterlimit:4;stroke-dasharray:none" 
-                    d="m 102.85628,33.247513 a 47.942116,47.942134 0 0 1 14.04154,33.89982 v 0 A 47.942116,47.942134 0 0 1 102.8559,101.04749" />
-            </svg>
-        
-        <svg viewBox="0 0 135 135" >
-            <path 
-                [class]="(diente.palatino !== undefined ) ? diente.palatino : 'd_fill_color'" 
-                id="path2719" style="fill:none;stroke-width:34.9999;stroke-miterlimit:4;stroke-dasharray:none" 
-                d="M 101.79755,102.10583 A 47.942116,47.942134 0 0 1 67.897358,116.14775 47.942116,47.942134 0 0 1 33.997163,102.10583" />
+
+<div  
+    [class.row]              = "!min" 
+    [class.d-flex]           = "!min" 
+    [class.justify-content-center] = "!min" >
+
+
+
+    <div  class="d_container_gen mr-1 ml-1">
+        <div class="d_container " 
+            [class.d_container_min_size] = "min"
+            [class.d_container_md_size] = "!min"
+            >
+
+            <svg
+                viewBox="0 0 135 135">
+                <path 
+                [class]="(diente.vestibular !== undefined ) ? diente.vestibular : 'd_fill_color'" 
+                id="path2709" style="stroke-width:34.9999;stroke-miterlimit:4;stroke-dasharray:none"
+                d="m 33.997165,32.188799 a 47.942116,47.942134 0 0 1 33.900193,-14.04193 47.942116,47.942134 0 0 1 33.900592,14.04231" />
+                </svg>
+            <svg viewBox="0 0 135 135" >
+                    <path [class]="(diente.mesial !== undefined ) ? diente.mesial : 'd_fill_color'" 
+                        id="path2714" style="fill:#e6e6e6;stroke-width:34.9999;stroke-miterlimit:4;stroke-dasharray:none" 
+                        d="m 102.85628,33.247513 a 47.942116,47.942134 0 0 1 14.04154,33.89982 v 0 A 47.942116,47.942134 0 0 1 102.8559,101.04749" />
+                </svg>
+            
+            <svg viewBox="0 0 135 135" >
+                <path 
+                    [class]="(diente.palatino !== undefined ) ? diente.palatino : 'd_fill_color'" 
+                    id="path2719" style="fill:none;stroke-width:34.9999;stroke-miterlimit:4;stroke-dasharray:none" 
+                    d="M 101.79755,102.10583 A 47.942116,47.942134 0 0 1 67.897358,116.14775 47.942116,47.942134 0 0 1 33.997163,102.10583" />
+                </svg>
+
+            <svg viewBox="0 0 135 135" >
+                <path 
+                    [class]="(diente.distal !== undefined ) ? diente.distal : 'd_fill_color'" 
+                    id="path2724" style="fill:none;stroke-width:34.9999;stroke-miterlimit:4;stroke-dasharray:none" 
+                d="M 32.938829,101.04748 A 47.942116,47.942134 0 0 1 18.89691,67.147333 47.942116,47.942134 0 0 1 32.938831,33.247133" />
             </svg>
 
-        <svg viewBox="0 0 135 135" >
-            <path 
-                [class]="(diente.distal !== undefined ) ? diente.distal : 'd_fill_color'" 
-                id="path2724" style="fill:none;stroke-width:34.9999;stroke-miterlimit:4;stroke-dasharray:none" 
-            d="M 32.938829,101.04748 A 47.942116,47.942134 0 0 1 18.89691,67.147333 47.942116,47.942134 0 0 1 32.938831,33.247133" />
-        </svg>
+            <svg
+                viewBox="0 0 135 135">
+            <ellipse
+                [class]="(diente.oclusal !== undefined ) ? diente.oclusal : 'd_fill_color'" 
+                style="stroke-width:0.241305;stroke-miterlimit:4;stroke-dasharray:none"
+                id="path2759"
+                cx="67.897362"
+                cy="67.147331"
+                rx="29.879349"
+                ry="29.879347" />
+            </svg>
 
-        <svg
-            viewBox="0 0 135 135">
-        <ellipse
-            [class]="(diente.oclusal !== undefined ) ? diente.oclusal : 'd_fill_color'" 
-            style="stroke-width:0.241305;stroke-miterlimit:4;stroke-dasharray:none"
-            id="path2759"
-            cx="67.897362"
-            cy="67.147331"
-            rx="29.879349"
-            ry="29.879347" />
-        </svg>
+            <img  *ngIf="diente.exodoncia" src="/assets/img/iconos_odonto/endodoncia.png">
+            <img  *ngIf="diente.corona" src="/assets/img/iconos_odonto/corona.png">
+            <img  *ngIf="diente.sano" src="/assets/img/iconos_odonto/sano.png">
+            <img  *ngIf="diente.ausente" src="/assets/img/iconos_odonto/ausente.png">
+            <img  *ngIf="diente.provisional" src="/assets/img/iconos_odonto/provisional.png">
+            <img  *ngIf="diente.sin_erupcionar" src="/assets/img/iconos_odonto/sin_erupcionar.png">
+            <img  *ngIf="diente.corona_adaptada" src="/assets/img/iconos_odonto/corona_adaptada.png">
+        </div>
+
+        <div class="number"> {{diente.numero}} </div>
     </div>
+</div>
 
-    <div class="number"> {{diente.numero}} </div>
+
+
+
+<div *ngIf="!min" class="icons mt-2 ">
+    
+        
+    
+    <div class="row ">
+        
+        <div (click)="marcar('exodoncia')" class="col-1">
+            <div id="container" >
+                <div id="navi">
+                    <img src="/assets/img/iconos_odonto/diente.png" />
+                </div>
+                <div id="infoi">
+                    <img src="/assets/img/iconos_odonto/endodoncia.png">
+                </div>
+            </div>
+        </div>
+        <div (click)="marcar('exodoncia')" class="col-3">Exodoncia Indicada</div>
+        <div (click)="marcar('sano')" class="col-1" >
+            <div id="container" >
+                <div id="navi">
+                    <img src="/assets/img/iconos_odonto/diente.png" />
+                </div>
+                <div id="infoi">
+                    <img src="/assets/img/iconos_odonto/sano.png">
+                </div>
+            </div>
+        </div>
+        <div (click)="marcar('sano')" class="col-3">Sano</div>
+        <div (click)="marcar('obturado')" [matMenuTriggerFor]="obturadoMenu" #obturadoMenuTrigger="matMenuTrigger" class="col-1" >
+            <div id="container" >
+                <div id="navi">
+                    <img src="/assets/img/iconos_odonto/obturado.png" />
+                </div>
+                <div id="infoi">
+                    
+                </div>
+            </div>
+        </div>
+        <div (click)="marcar('obturado')" class="col-3">
+            <mat-menu #obturadoMenu="matMenu" >
+                <button mat-menu-item (click)="seccion('vestibular','obturado')" >Vestibular</button>
+                <button mat-menu-item (click)="seccion('mesial','obturado')" >Mesial</button>
+                <button mat-menu-item (click)="seccion('palatino','obturado')" >Palatino</button>
+                <button mat-menu-item (click)="seccion('distal','obturado')" >Distal</button>
+                <button mat-menu-item (click)="seccion('oclusal','obturado')" >Oclusal</button>
+            </mat-menu>
+            Obturado</div>
+    </div>
+    <div class="row">
+        <div (click)="marcar('caries');" [matMenuTriggerFor]="cariesMenu" #cariesMenuTrigger="matMenuTrigger" class="col-1" >
+            <div id="container" >
+                <div id="navi">
+                    <img src="/assets/img/iconos_odonto/caries.png" />
+                </div>
+                
+                
+            </div>
+        </div>
+        <div (click)="marcar('caries');  " class="col-3">
+            <mat-menu #cariesMenu="matMenu">
+                <button mat-menu-item (click)="seccion('vestibular','caries')" >Vestibular</button>
+                <button mat-menu-item (click)="seccion('mesial','caries')" >Mesial</button>
+                <button mat-menu-item (click)="seccion('palatino','caries')" >Palatino</button>
+                <button mat-menu-item (click)="seccion('distal','caries')" >Distal</button>
+                <button mat-menu-item (click)="seccion('oclusal','caries')" >Oclusal</button>
+            </mat-menu>
+            Caries
+        </div>
+        <div (click)="marcar('ausente')" class="col-1" >
+            <div id="container" >
+                <div id="navi">
+                    <img src="/assets/img/iconos_odonto/diente.png" />
+                </div>
+                <div id="infoi">
+                    <img src="/assets/img/iconos_odonto/ausente.png">
+                </div>
+            </div>
+            
+        </div>
+        <div (click)="marcar('ausente')" class="col-3">Ausente</div>
+        
+        <div (click)="marcar('corona_adaptada')" class="col-1" >
+            <div id="container" >
+                <div id="navi">
+                    <img src="/assets/img/iconos_odonto/diente.png" />
+                </div>
+                <div id="infoi">
+                    <img src="/assets/img/iconos_odonto/corona_adaptada.png">
+                </div>
+            </div>
+        </div>
+        <div (click)="marcar('corona_adaptada')" class="col-3">Corona Adaptada</div>
+    </div>
+    <div class="row">
+        <div (click)="marcar('corona')" class="col-1" >
+            <div id="container" >
+                <div id="navi">
+                    <img src="/assets/img/iconos_odonto/diente.png" />
+                </div>
+                <div id="infoi">
+                    <img src="/assets/img/iconos_odonto/corona.png">
+                </div>
+            </div>
+        </div>
+        <div (click)="marcar('corona')" class="col-3">Corona Desadaptada </div>
+        <div (click)="marcar('provisional')" class="col-1" >
+            <div id="container" >
+                <div id="navi">
+                    <img src="/assets/img/iconos_odonto/diente.png" />
+                </div>
+                <div id="infoi">
+                    <img src="/assets/img/iconos_odonto/provisional.png">
+                </div>
+            </div>
+        </div>
+        <div (click)="marcar('provisional')" class="col-3">Provisional</div>
+        <div (click)="marcar('exodoncia')" class="col-4"></div>
+    </div>
+    
+    <div class="row">
+        <div (click)="marcar('exodoncia')" class="col-4"></div>
+        <div (click)="marcar('sin_erupcionar')" class="col-1" >
+            <div id="container" >
+                <div id="navi">
+                    <img src="/assets/img/iconos_odonto/diente.png" />
+                </div>
+                <div id="infoi">
+                    <img src="/assets/img/iconos_odonto/sin_erupcionar.png">
+                </div>
+            </div>
+        </div>
+        <div (click)="marcar('sin_erupcionar')"  class="col-3">Sin erupcionar</div>
+        <div class="col-4"></div>
+    </div>
 </div>

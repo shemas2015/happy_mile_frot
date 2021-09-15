@@ -34,6 +34,8 @@ import { MatTableModule } from '@angular/material/table'
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { OdontogramaComponent } from 'app/pages/odontograma/odontograma.component';
 import { DienteComponent } from 'app/pages/odontograma/diente/diente.component';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   imports: [
@@ -56,7 +58,8 @@ import { DienteComponent } from 'app/pages/odontograma/diente/diente.component';
     NgbModule,
     NgxMaterialTimepickerModule,
     MatTableModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatMenuModule
     
     
     

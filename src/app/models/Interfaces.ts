@@ -1,3 +1,4 @@
+
 import { Time } from '@angular/common';
 import {CalendarEvent} from 'angular-calendar';
 
@@ -6,6 +7,24 @@ export interface ValoracionModel{
     created_at : Date;
     valoracion : string;
 }
+
+export interface DienteModel{
+    numero           : number;
+    exodoncia?       : boolean;
+    corona?          : boolean;
+    sano?            : boolean;
+    ausente?         : boolean;
+    provisional?     : boolean;
+    sin_erupcionar?  : boolean;
+    corona_adaptada? : boolean;
+    vestibular?      : string;
+    mesial?          : string;
+    palatino?        : string;
+    distal?          : string; 
+    oclusal?         : string; 
+
+}
+
 
 export interface PacienteModel{
     id                : number;
@@ -27,6 +46,7 @@ export interface PacienteModel{
     parentezco?       : string;
     celular_acom?     : string;
     motivo_consulta?  : string;
+    dientes?          : DienteModel[]
 }
 
 export interface DoctorModel{
@@ -56,14 +76,5 @@ export interface LoginI{
     password : string
 }
 
-export interface DienteModel{
-    numero      : number;
-    vestibular? : string;
-    mesial?     : string;
-    palatino?   : string;
-    distal?     : string; 
-    oclusal?    : string; 
-
-}
 
 
