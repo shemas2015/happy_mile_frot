@@ -35,6 +35,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { OdontogramaComponent } from 'app/pages/odontograma/odontograma.component';
 import { DienteComponent } from 'app/pages/odontograma/diente/diente.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { TratamientosComponent } from 'app/pages/tratamientos/tratamientos.component';
 
 
 @NgModule({
@@ -80,7 +81,9 @@ import {MatMenuModule} from '@angular/material/menu';
     DoctoresComponent,
     PacientesComponent,
     OdontogramaComponent,
-    DienteComponent
+    DienteComponent,
+    TratamientosComponent
+
     
   ]
 })

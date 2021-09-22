@@ -10,6 +10,7 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { TableListComponent } from '../../table-list/table-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
+import { TratamientosComponent } from 'app/pages/tratamientos/tratamientos.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -63,8 +64,9 @@ export const AdminLayoutRoutes: Routes = [
     /*NEWS!**/
     { path: 'login',      component: LoginComponent },
     { path: 'citas',      component: CitasComponent, canActivate: [ AuthGuard ] },
-    { path: 'doctores',      component: DoctoresComponent, canActivate: [ AuthGuard ] },
-    { path: 'pacientes',      component: PacientesComponent, canActivate: [ AuthGuard ] },
+    { path: 'doctores',   component: DoctoresComponent, canActivate: [ AuthGuard ] },
+    { path: 'pacientes',  component: PacientesComponent, canActivate: [ AuthGuard ] },
+    { path: 'tratamientos',  component: TratamientosComponent, canActivate: [ AuthGuard ] },
     
     
 ];

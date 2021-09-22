@@ -22,7 +22,7 @@ export interface DienteModel{
     palatino?        : string;
     distal?          : string; 
     oclusal?         : string; 
-
+    
 }
 
 
@@ -55,10 +55,10 @@ export interface DoctorModel{
     apellidos      : string;
     identificacion : string;
     color?         : {
-                        primary   :string;
-                        secondary :string;
-                    };
-
+        primary   :string;
+        secondary :string;
+    };
+    
 }
 
 export interface CitaModel{
@@ -77,4 +77,8 @@ export interface LoginI{
 }
 
 
-
+export interface TratamientoModel{
+    id            : number;
+    descripcion   : string;
+    valor         : number;
+}

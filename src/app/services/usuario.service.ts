@@ -1,12 +1,13 @@
 import { LoginI } from './../models/Interfaces';
 import { HttpClient ,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  url = "http://localhost:8000";
+  url = environment.URL;
 
   constructor(
     private http: HttpClient,

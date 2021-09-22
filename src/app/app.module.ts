@@ -43,6 +43,7 @@ import {DatePipe} from '@angular/common';
     AdminLayoutComponent
     
     
+    
 
   ],
   providers: [

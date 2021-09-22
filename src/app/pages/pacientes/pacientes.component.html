@@ -220,7 +220,7 @@
                           </mat-form-field>
 
                           <!--Histórico de valoraciones-->
-                          <table mat-table  [dataSource]="paciente.valoraciones" class="mat-elevation-z8">
+                          <table mat-table  *ngIf="paciente" [dataSource]="paciente.valoraciones" class="mat-elevation-z8">
                             <ng-container matColumnDef="fecha">
                               <th mat-header-cell *matHeaderCellDef> Fecha </th>
                               <td mat-cell *matCellDef="let element"> {{element.created_at | date :'shortDate' }} </td>
@@ -237,7 +237,7 @@
                           </table>
 
                     </mat-tab>
-                    <mat-tab label="Odontograma">
+                    <mat-tab label="Odontograma" *ngIf="paciente" >
                         <app-odontograma [dientes]="paciente.dientes" (refresh)="setDientes($event)" ></app-odontograma>
                     </mat-tab>
                     <mat-tab label="Diagnóstico">Content 4</mat-tab>

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { DienteModel } from 'app/models/Interfaces';
 import { FormGroup } from '@angular/forms';
 import { CitaModel } from './../models/Interfaces';
@@ -7,12 +8,14 @@ import { HttpClient ,HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class CitasService {
 
-  url = "http://localhost:8000";
+  url = environment.URL;
 
   constructor(
     private http: HttpClient,
