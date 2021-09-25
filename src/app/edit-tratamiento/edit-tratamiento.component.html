@@ -1,0 +1,63 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title ">Tratamiento</h4>
+                        <p class="card-category">  Agregar tratamiento </p>
+                    </div>
+                    <div class="card-body">
+
+                        <form  [formGroup]="form" (ngSubmit)="guardar()">
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Descripción</mat-label>
+                                        <textarea 
+                                            autocomplete            = "off"
+                                            formControlName         = "descripcion"
+                                            matInput placeholder    = "Breve descripción del tratamento"
+                                            ></textarea>
+                                        <mat-error *ngIf="form.get('descripcion').invalid"> 
+                                            Campo obligatorio 
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Valor</mat-label>
+                                        <input 
+                                            matInput 
+                                            type              = "number"
+                                            formControlName   = "valor"
+                                            autocomplete      = "off"
+                                            placeholder       = "Valor del tratamiento">
+                                            <mat-error *ngIf="form.get('valor').invalid"> 
+                                                Campo obligatorio 
+                                            </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="submit" mat-raised-button class="btn btn-info pull-right mb-3">
+                                        <i class="material-icons">save</i>
+                                        Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

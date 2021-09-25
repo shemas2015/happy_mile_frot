@@ -1,3 +1,4 @@
+import { EditTratamientoComponent } from './../../../edit-tratamiento/edit-tratamiento.component';
 import { PacientesComponent } from '../../pacientes/pacientes.component';
 import { DoctoresComponent } from './../../../doctores/doctores.component';
 import { LoginComponent } from './../../login/login.component';
@@ -36,6 +37,7 @@ import { OdontogramaComponent } from 'app/pages/odontograma/odontograma.componen
 import { DienteComponent } from 'app/pages/odontograma/diente/diente.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { TratamientosComponent } from 'app/pages/tratamientos/tratamientos.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -60,7 +62,8 @@ import { TratamientosComponent } from 'app/pages/tratamientos/tratamientos.compo
     NgxMaterialTimepickerModule,
     MatTableModule,
     MatSlideToggleModule,
-    MatMenuModule
+    MatMenuModule,
+    MatPaginatorModule
     
     
     
@@ -82,7 +85,8 @@ import { TratamientosComponent } from 'app/pages/tratamientos/tratamientos.compo
     PacientesComponent,
     OdontogramaComponent,
     DienteComponent,
-    TratamientosComponent
+    TratamientosComponent,
+    EditTratamientoComponent
 
     
   ]

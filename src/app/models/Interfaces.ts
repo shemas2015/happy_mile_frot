@@ -82,3 +82,13 @@ export interface TratamientoModel{
     descripcion   : string;
     valor         : number;
 }
+
+export interface Paginate{
+    current_page    : number;
+    from            : number;
+    to              : number;
+    next_page_url   : string;
+    prev_page_url   : string;
+    per_page        : number;
+    total           : number;
+}
