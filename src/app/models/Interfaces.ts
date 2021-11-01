@@ -1,4 +1,3 @@
-
 import { Time } from '@angular/common';
 import {CalendarEvent} from 'angular-calendar';
 
@@ -26,6 +25,12 @@ export interface DienteModel{
 }
 
 
+export interface Tratamiento{
+    id            : number;
+    descripcion   : string;
+    valor         : number;
+}
+
 export interface PacienteModel{
     id                : number;
     identificacion    : string;
@@ -46,7 +51,8 @@ export interface PacienteModel{
     parentezco?       : string;
     celular_acom?     : string;
     motivo_consulta?  : string;
-    dientes?          : DienteModel[]
+    dientes?          : DienteModel[],
+    tratamientos?     : TratamientoModel[];
 }
 
 export interface DoctorModel{

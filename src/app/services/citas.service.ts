@@ -1,5 +1,5 @@
 import { environment } from './../../environments/environment';
-import { DienteModel } from 'app/models/Interfaces';
+import { DienteModel, PacienteModel } from 'app/models/Interfaces';
 import { FormGroup } from '@angular/forms';
 import { CitaModel } from './../models/Interfaces';
 import { Observable } from 'rxjs';
@@ -112,10 +112,11 @@ export class CitasService {
    * @param dientes 
    * @returns 
    */
-  crearPaciente( form: FormGroup , dientes : DienteModel[] ){
+  crearPaciente( form: FormGroup , paciente : PacienteModel /*, dientes : DienteModel[]*/ ){
     const data                  = form.value;
     data["fecha_nacimiento"]    = this.datePipe.transform(data["fecha_nacimiento"],"yyyy-MM-dd");
-    data["dientes"]             = dientes;
+    data["dientes"]             = paciente.dientes;
+    data["tratamientos"]        = paciente.tratamientos;
 
     return this.http.post( 
       this.url+"/api/crearPaciente" , data , 

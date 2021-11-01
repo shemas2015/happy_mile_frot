@@ -240,7 +240,9 @@
                     <mat-tab label="Odontograma" *ngIf="paciente" >
                         <app-odontograma [dientes]="paciente.dientes" (refresh)="setDientes($event)" ></app-odontograma>
                     </mat-tab>
-                    <mat-tab label="Diagnóstico">Content 4</mat-tab>
+                    <mat-tab label="Plan de tratamiento">
+                        <app-plan-tratamiento [tratamientos]="paciente.tratamientos" ></app-plan-tratamiento>
+                    </mat-tab>
                     <mat-tab label="Evoluciones">Content 5</mat-tab>
                 </mat-tab-group>
                 

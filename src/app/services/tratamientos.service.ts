@@ -33,6 +33,16 @@ export class TratamientosService {
       .get(`${this.url}/api/tratamientos?page=${page}` , this.httpOptions );
   }
 
+
+  /**
+   * Consulta los tratamientos
+   * @returns 
+   */
+   public getAllTratamientos():Observable<any> {
+    return this.http
+      .get(`${this.url}/api/tratamiento/getAll` , this.httpOptions );
+  }
+
   /**
    * 
    * @param tratamiento 

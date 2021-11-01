@@ -156,6 +156,7 @@ export class PacientesComponent implements OnInit {
           }); 
         }
 
+        
 
 
     })
@@ -173,7 +174,7 @@ export class PacientesComponent implements OnInit {
         text:   'Verifique los campos obligatorios'
       })
     }else{
-      this.citasService.crearPaciente(this.forma , this.dientes )
+      this.citasService.crearPaciente(this.forma , this.paciente )
         .subscribe((data:PacienteModel) => {
             this.paciente = data;
             swal.fire({
