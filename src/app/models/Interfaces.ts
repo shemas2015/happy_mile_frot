@@ -2,6 +2,7 @@ import { Time } from '@angular/common';
 import {CalendarEvent} from 'angular-calendar';
 
 
+
 export interface ValoracionModel{
     created_at : Date;
     valoracion : string;
@@ -31,6 +32,15 @@ export interface Tratamiento{
     valor         : number;
 }
 
+
+
+export interface EvolucionModel{
+    id          : number,
+    evolucion   : string,
+    created_at  : Date
+
+}
+
 export interface PacienteModel{
     id                : number;
     identificacion    : string;
@@ -53,6 +63,7 @@ export interface PacienteModel{
     motivo_consulta?  : string;
     dientes?          : DienteModel[],
     tratamientos?     : TratamientoModel[];
+    evoluciones?      : EvolucionModel[]
 }
 
 export interface DoctorModel{

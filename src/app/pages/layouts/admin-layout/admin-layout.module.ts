@@ -40,6 +40,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { TratamientosComponent } from 'app/pages/tratamientos/tratamientos.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { EvolucionComponent } from 'app/pages/evolucion/evolucion.component';
+
 
 
 @NgModule({
@@ -90,7 +92,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     DienteComponent,
     TratamientosComponent,
     EditTratamientoComponent,
-    PlanTratamientoComponent
+    PlanTratamientoComponent,
+    EvolucionComponent
+
 
     
   ]

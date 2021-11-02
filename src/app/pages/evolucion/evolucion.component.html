@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-12">
+  
+      <form  [formGroup]="formEvolucion" >
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Digite la evolución en el procedimiento</mat-label>
+            <input matInput 
+                placeholder       = ""
+                formControlName   = "evolucion"
+                autocomplete      = "off"
+                 >
+          </mat-form-field>
+
+      </form>
+    </div>
+  </div>
+  
+  
+  <div class="row" *ngIf="evoluciones">
+    <div class="col-12">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="w-100" >
+  
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="created_at">
+          <th mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let element"> 
+              {{ element.created_at | date }} 
+             </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="evolucion">
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
+          <td mat-cell *matCellDef="let element"> {{element.evolucion }} </td>
+        </ng-container>
+      
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  
+    </div>
+  </div>
+  

@@ -1,3 +1,4 @@
+import { EvolucionModel } from './../../models/Interfaces';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CitasService } from '../../services/citas.service';
 import { Component, OnInit } from '@angular/core';
@@ -201,8 +202,6 @@ export class PacientesComponent implements OnInit {
   setDientes( e:DienteModel[] ){
     this.dientes = e;
   }
-
-
 
 
 

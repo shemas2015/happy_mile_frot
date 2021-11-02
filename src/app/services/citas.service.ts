@@ -117,6 +117,7 @@ export class CitasService {
     data["fecha_nacimiento"]    = this.datePipe.transform(data["fecha_nacimiento"],"yyyy-MM-dd");
     data["dientes"]             = paciente.dientes;
     data["tratamientos"]        = paciente.tratamientos;
+    data["evoluciones"]         = paciente.evoluciones;
 
     return this.http.post( 
       this.url+"/api/crearPaciente" , data , 
