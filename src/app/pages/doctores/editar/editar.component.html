@@ -1,0 +1,92 @@
+<form [formGroup]="formEdit"  (ngSubmit)="guardarUsuario()" >
+    <div class="modal-body">
+        <div class="card">
+            <div class="card-header card-header-info">
+                <h4 class="card-title">Crear usuario</h4>
+                <p class="card-category">Formulario para la creación de usuarios</p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="example-full-width">
+                            <input 
+                                matInput 
+                                placeholder       = "Nombres y apellidos completos"
+                                type              = "text"
+                                formControlName   = "nombres"
+                                autocomplete      = "off"
+                            >
+                            <mat-error>Digite los nombres y apellidos completos</mat-error>
+                        </mat-form-field>
+                        
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="example-full-width">
+                            <input 
+                                matInput 
+                                placeholder       = "Correo electrónico"
+                                type              = "email"
+                                formControlName   = "email"
+                                autocomplete      = "off"
+                            >
+                            <mat-error>Digite un correo electrónico válido</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="example-full-width">
+                            <input 
+                                matInput 
+                                placeholder       = "Contraseña"
+                                type              = "password"
+                                formControlName   = "password"
+                                autocomplete      = "off"
+                                value=""
+                            >
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="example-full-width">
+                            <input 
+                                matInput 
+                                placeholder       = "Digite nuevamente la contraseña"
+                                type              = "password"
+                                formControlName   = "confirmPassword"
+                                [errorStateMatcher]="matcher"
+                                autocomplete      = "off"
+                            >
+                        </mat-form-field>
+                        
+                        <mat-error *ngIf="formEdit.hasError('notSame')">
+                            Las contraseñas no coinciden
+                        </mat-error>  
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    
+    <div class="modal-footer">
+        <button 
+            type="button" 
+            class="btn btn-outline-dark"
+            [mat-dialog-close]
+             >
+        Cerrar</button>
+        
+        <button 
+            type          = "submit"
+            [disabled]    = "formEdit.invalid"
+            class         = "btn btn-info" >
+            Guardar
+    </button>
+</div>
+
+</form>
