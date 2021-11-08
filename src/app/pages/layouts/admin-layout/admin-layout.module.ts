@@ -1,7 +1,8 @@
+import { EditarComponent } from './../../doctores/editar/editar.component';
+import { DoctoresComponent } from './../../doctores/doctores.component';
 import { PlanTratamientoComponent } from './../../plan-tratamiento/plan-tratamiento.component';
 import { EditTratamientoComponent } from './../../../edit-tratamiento/edit-tratamiento.component';
 import { PacientesComponent } from '../../pacientes/pacientes.component';
-import { DoctoresComponent } from './../../../doctores/doctores.component';
 import { LoginComponent } from './../../login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -93,7 +94,8 @@ import { EvolucionComponent } from 'app/pages/evolucion/evolucion.component';
     TratamientosComponent,
     EditTratamientoComponent,
     PlanTratamientoComponent,
-    EvolucionComponent
+    EvolucionComponent,
+    EditarComponent
 
 
     

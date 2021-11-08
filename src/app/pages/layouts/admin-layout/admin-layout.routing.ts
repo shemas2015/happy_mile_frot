@@ -1,6 +1,7 @@
+import { DoctoresComponent } from './../../doctores/doctores.component';
 import { PacientesComponent } from '../../pacientes/pacientes.component';
 import { PacienteModel } from './../../../models/Interfaces';
-import { DoctoresComponent } from './../../../doctores/doctores.component';
+
 import { AuthGuard } from './../../../guards/auth.guard';
 import { LoginComponent } from './../../login/login.component';
 import { CitasComponent } from './../../citas/citas.component';
@@ -64,7 +65,7 @@ export const AdminLayoutRoutes: Routes = [
     /*NEWS!**/
     { path: 'login',      component: LoginComponent },
     { path: 'citas',      component: CitasComponent, canActivate: [ AuthGuard ] },
-    { path: 'doctores',   component: DoctoresComponent, canActivate: [ AuthGuard ] },
+    { path: 'doctores',   component: DoctoresComponent , canActivate: [ AuthGuard ] },
     { path: 'pacientes',  component: PacientesComponent, canActivate: [ AuthGuard ] },
     { path: 'tratamientos',  component: TratamientosComponent, canActivate: [ AuthGuard ] },
     

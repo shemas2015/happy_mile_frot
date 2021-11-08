@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { LoginI } from './../models/Interfaces';
 import { HttpClient ,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -8,10 +9,19 @@ import { environment } from './../../environments/environment';
 })
 export class UsuarioService {
   url = environment.URL;
+  httpOptions; 
 
   constructor(
     private http: HttpClient,
-  ) { }
+  ) { 
+
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  'Bearer '+localStorage.getItem("token")
+      })
+    };
+
+  }
 
   public login (  login: LoginI){
     return this.http.post(
@@ -24,16 +34,18 @@ export class UsuarioService {
    * @returns 
    */
   public isLog  ( token: string )  {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization':  'Bearer '+token
-      })
-    };
-    
     return this.http
-      .post(this.url+"/api/user" , {} ,httpOptions );
-    
-   
+      .post(this.url+"/api/user" , {} ,this.httpOptions );
+  }
+
+
+  public getUsers() : Observable<any> {
+    return this.http.get(this.url+"/api/users" , this.httpOptions)
+  }
+
+
+  public guardarUsuario( user:any ) : Observable<any> {
+    return this.http.post(this.url+"/api/register" , user , this.httpOptions)
   }
 
 
