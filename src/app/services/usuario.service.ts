@@ -48,6 +48,12 @@ export class UsuarioService {
     return this.http.post(this.url+"/api/register" , user , this.httpOptions)
   }
 
+  public editarUsuario( user:any ) : Observable<any> {
+    return this.http.post(this.url+"/api/users" , user , this.httpOptions)
+  }
+
+
+
 
 
 }

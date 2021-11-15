@@ -1,7 +1,8 @@
-import { MatDialogRef } from '@angular/material/dialog';
+import { UserModel } from './../../../models/Interfaces';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsuarioService } from './../../../services/usuario.service';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, ValidationErrors, FormGroupDirective, FormControl, NgForm } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
 import Swal from 'sweetalert2';
 
@@ -20,19 +21,31 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./editar.component.css']
 })
 export class EditarComponent implements OnInit {
-  formEdit:FormGroup;
+  formEdit    : FormGroup;
+  usuario     : UserModel;
+  edit        : boolean = false;
 
 
   matcher = new MyErrorStateMatcher();
 
   constructor(
-    public fb                 : FormBuilder,
-    private usuarioService    : UsuarioService,
-    private dialogRef         : MatDialogRef<EditarComponent>
+    public fb                               : FormBuilder,
+    private usuarioService                  : UsuarioService,
+    private dialogRef                       : MatDialogRef<EditarComponent>,
+    @Inject(MAT_DIALOG_DATA) public data    : any,
   ) { }
   
 
   ngOnInit(): void {
+    if( this.data == undefined  ){
+      this.edit = false;
+    }
+    else
+    {
+      this.usuario    = this.data["usuario"];
+      this.edit       = true;
+    }
+    
     this.initForm()
   }
 
@@ -46,12 +59,29 @@ export class EditarComponent implements OnInit {
   }
 
   public initForm(){
-    this.formEdit = this.fb.group({
-      "nombres"           : ['' , [Validators.required] ],
-      "email"             : ['' , [Validators.required , Validators.email ] ],
-      "password"          : ['' , [Validators.required] ],
-      "confirmPassword"   : [''  ]
-    } , { validators: this.checkPasswords } )
+    if( this.edit ){
+      this.formEdit = this.fb.group({
+        "nombres"           : [ this.usuario.name , [Validators.required] ],
+        "email"             : [ this.usuario.email , [Validators.required , Validators.email ] ],
+        "password"          : [''  ],
+        "confirmPassword"   : [''  ]
+      } , { validators: this.checkPasswords } )
+      
+
+    }
+    else
+    {
+      
+      this.formEdit = this.fb.group({
+        "nombres"           : ['' , [Validators.required] ],
+        "email"             : ['' , [Validators.required , Validators.email ] ],
+        "password"          : ['' , [Validators.required] ],
+        "confirmPassword"   : [''  ]
+      } , { validators: this.checkPasswords } )
+      
+
+    }
+    
   }
 
 
@@ -68,10 +98,22 @@ export class EditarComponent implements OnInit {
       password_confirmation   :  this.formEdit.get("confirmPassword").value ,
     }
 
-    this.usuarioService.guardarUsuario(user).subscribe( res => {
+
+
+    let usuarioServiceSave;
+    if( this.edit ){
+      user["id"] = this.usuario.id;
+      usuarioServiceSave = this.usuarioService.editarUsuario(user)
+    }
+    else
+    {
+      usuarioServiceSave = this.usuarioService.guardarUsuario(user)
+    }
+
+    usuarioServiceSave.subscribe( res => {
       Swal.fire(
         '¡Correcto!',
-        'Usuario creado correctamente!',
+        'Usuario almacenado correctamente!',
         'success'
       );
       this.dialogRef.close();
@@ -82,7 +124,6 @@ export class EditarComponent implements OnInit {
         error.error,
         'error'
       );
-      console.log(error);
 
 
     }
