@@ -23,8 +23,9 @@ export class AuthGuard implements CanActivate {
       
     }
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+      this.us.setToken();
       return this.us
-      .isLog(localStorage.getItem("token"))
+      .isLog()
       .map((e) => {
         if (e) {
           return true;

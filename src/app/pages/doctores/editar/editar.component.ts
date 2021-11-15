@@ -124,11 +124,8 @@ export class EditarComponent implements OnInit {
         error.error,
         'error'
       );
-
-
     }
     )
-
 
   }
 

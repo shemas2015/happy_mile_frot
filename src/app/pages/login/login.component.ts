@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
     
     this.usuarioService.login(this.form.value).subscribe(
       data => {
-        localStorage.setItem('token',data["token"]);
-        this.router.navigate(['/citas']);
+        this.doSignup(data);
+        this.router.navigate(['citas']);
       },
       error => {
         swal.fire('Login incorrecto!', 'Credenciales no válidas', 'error');
@@ -51,6 +51,11 @@ export class LoginComponent implements OnInit {
     );
     
   }
+
+  async doSignup(data) {
+    localStorage.setItem('token',data["token"]);
+  }
+  
 
 
   crearFormulario(){
@@ -70,7 +75,7 @@ export class LoginComponent implements OnInit {
     }
     
     
-    this.usuarioService.isLog(localStorage.getItem("token")).subscribe( 
+    this.usuarioService.isLog().subscribe( 
         data  => { 
           this.router.navigate(['/citas']);
         } ,

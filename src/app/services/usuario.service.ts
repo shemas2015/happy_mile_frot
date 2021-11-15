@@ -15,6 +15,12 @@ export class UsuarioService {
     private http: HttpClient,
   ) { 
 
+    this.setToken();
+
+  }
+
+
+  public setToken(){
     this.httpOptions = {
       headers: new HttpHeaders({
         'Authorization':  'Bearer '+localStorage.getItem("token")
@@ -33,7 +39,7 @@ export class UsuarioService {
    * Verificar si está logueado
    * @returns 
    */
-  public isLog  ( token: string )  {
+  public isLog  (  )  {
     return this.http
       .post(this.url+"/api/user" , {} ,this.httpOptions );
   }

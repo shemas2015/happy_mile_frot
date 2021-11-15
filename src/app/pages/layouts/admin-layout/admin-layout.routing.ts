@@ -57,15 +57,17 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
+    /*
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
-
+    */
     /*NEWS!**/
     { path: 'login',      component: LoginComponent },
     { path: 'citas',      component: CitasComponent, canActivate: [ AuthGuard ] },
     { path: 'doctores',   component: DoctoresComponent , canActivate: [ AuthGuard ] },
+    { path: 'doctores/out',   component: DoctoresComponent , canActivate: [ AuthGuard ] },
     { path: 'pacientes',  component: PacientesComponent, canActivate: [ AuthGuard ] },
     { path: 'tratamientos',  component: TratamientosComponent, canActivate: [ AuthGuard ] },
     

@@ -16,6 +16,7 @@ const routes: Routes =[
     children: [{
       path: '',
       loadChildren: './pages/layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+      //loadChildren: `./pages/layouts/admin-layout/admin-layout.module${'AdminLayoutModule'}`
     }]
   }
 ];
@@ -25,7 +26,7 @@ const routes: Routes =[
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes,{
-       useHash: true
+       useHash: false
     })
   ],
   exports: [

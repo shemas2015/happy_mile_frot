@@ -12,14 +12,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/doctores', title: 'Doctores',  icon: 'people', class: '' },
   { path: '/pacientes', title: 'Pacientes',  icon: 'sick', class: '' },
   { path: '/tratamientos', title: 'Tratamientos',  icon: 'description', class: '' },
-
-  { path: '/usuarios', title: 'Usuarios',  icon: 'manage_accounts', class: '' },
-  
-    { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-    { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
-    { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
-    { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
+  { path: '/doctores/out', title: 'Cerrar sesión',  icon:'exit_to_app', class: 'active-pro'  },
   
     
 ];
