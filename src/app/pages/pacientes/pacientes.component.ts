@@ -200,7 +200,7 @@ export class PacientesComponent implements OnInit {
    * @param e 
    */
   setDientes( e:DienteModel[] ){
-    this.dientes = e;
+    this.paciente.dientes = e;
   }
 
 
