@@ -1,17 +1,12 @@
-<div class="wrapper" *ngIf="this.router.url !== '/login'" >
+<div class="wrapper" >
     <div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
         <app-sidebar></app-sidebar>
         <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
     </div>
     <div class="main-panel">
-        <app-navbar></app-navbar>
+        <app-navbar *ngIf="this.router.url !== '/login'" ></app-navbar>
         <router-outlet></router-outlet>
         <app-footer></app-footer>
     </div>    
 </div>
-
-<div class="content" *ngIf="this.router.url === '/login'">
-    <router-outlet></router-outlet>
-</div>
-
 
