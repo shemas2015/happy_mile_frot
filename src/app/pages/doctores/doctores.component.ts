@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { EditarComponent } from './editar/editar.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserModel } from './../../models/Interfaces';
@@ -5,6 +6,7 @@ import { UsuarioService } from './../../services/usuario.service';
 
 
 import { Component, Inject, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-doctores',
@@ -20,14 +22,28 @@ export class DoctoresComponent implements OnInit {
   
 
   constructor( 
-    private usuarioService                  : UsuarioService,
-    public dialog                           : MatDialog
+    private usuarioService    : UsuarioService,
+    public dialog             : MatDialog,
+    public route              : ActivatedRoute,
+    public router             : Router
      ) { }
 
   ngOnInit(): void {
-    this.usuarioService.getUsers().subscribe( ( users:UserModel[] ) => {
-      this.filtrados = users;
-    })
+    const opc = this.route.snapshot.paramMap.get('out');
+    if( opc == "out" ){
+      this.usuarioService.closeSession().subscribe( () =>{
+        localStorage.removeItem('token');
+        this.router.navigate(["/login"]);
+      });
+    }else{
+      this.usuarioService.getUsers().subscribe( ( users:UserModel[] ) => {
+        this.filtrados = users;
+      })
+
+    }
+
+
+    
 
   }
 

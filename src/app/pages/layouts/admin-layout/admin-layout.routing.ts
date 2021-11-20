@@ -67,7 +67,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'login',      component: LoginComponent },
     { path: 'citas',      component: CitasComponent, canActivate: [ AuthGuard ] },
     { path: 'doctores',   component: DoctoresComponent , canActivate: [ AuthGuard ] },
-    { path: 'doctores/out',   component: DoctoresComponent , canActivate: [ AuthGuard ] },
+    { path: 'doctores/:out',   component: DoctoresComponent , canActivate: [ AuthGuard ] },
     { path: 'pacientes',  component: PacientesComponent, canActivate: [ AuthGuard ] },
     { path: 'tratamientos',  component: TratamientosComponent, canActivate: [ AuthGuard ] },
     

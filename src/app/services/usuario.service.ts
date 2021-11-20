@@ -58,6 +58,10 @@ export class UsuarioService {
     return this.http.post(this.url+"/api/users" , user , this.httpOptions)
   }
 
+  public closeSession() : Observable<any> {
+    return this.http.get(this.url+"/api/closeSession" , this.httpOptions)
+  }
+
 
 
 
