@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { EditarComponent } from './../../doctores/editar/editar.component';
 import { DoctoresComponent } from './../../doctores/doctores.component';
 import { PlanTratamientoComponent } from './../../plan-tratamiento/plan-tratamiento.component';
@@ -69,7 +70,8 @@ import { EvolucionComponent } from 'app/pages/evolucion/evolucion.component';
     MatSlideToggleModule,
     MatMenuModule,
     MatPaginatorModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDialogModule
     
     
     
@@ -96,10 +98,13 @@ import { EvolucionComponent } from 'app/pages/evolucion/evolucion.component';
     PlanTratamientoComponent,
     EvolucionComponent,
     EditarComponent
+    
 
 
     
-  ]
+  ],
+  
+
 })
 
 export class AdminLayoutModule {}

@@ -75,7 +75,7 @@ export class OdontogramaComponent implements OnInit {
   abrirModal( diente:DienteModel ){
     const dialogRef = this.dialog.open( DienteComponent , {
       width: '600px',
-      height: '90%',
+      height: '600px',
       data: {diente: diente, min: false }
     });
 
