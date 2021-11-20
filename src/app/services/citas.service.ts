@@ -115,9 +115,9 @@ export class CitasService {
   crearPaciente( form: FormGroup , paciente : PacienteModel /*, dientes : DienteModel[]*/ ){
     const data                  = form.value;
     data["fecha_nacimiento"]    = this.datePipe.transform(data["fecha_nacimiento"],"yyyy-MM-dd");
-    data["dientes"]             = paciente.dientes;
-    data["tratamientos"]        = paciente.tratamientos;
-    data["evoluciones"]         = paciente.evoluciones;
+    data["dientes"]             = (paciente) ? paciente.dientes : null;
+    data["tratamientos"]        = (paciente) ? paciente.tratamientos : null;
+    data["evoluciones"]         = (paciente) ? paciente.evoluciones : null;
 
     return this.http.post( 
       this.url+"/api/crearPaciente" , data , 

@@ -185,7 +185,7 @@
                 </div>
                 
                 
-                <mat-tab-group mat-align-tabs="start">
+                <mat-tab-group mat-align-tabs="start" *ngIf="paciente">
                     <mat-tab label="Antecedentes Médicos">
                         <div class="row" *ngIf="forma" >
                             <table class="table">
@@ -237,13 +237,13 @@
                           </table>
 
                     </mat-tab>
-                    <mat-tab label="Odontograma" *ngIf="paciente" >
+                    <mat-tab label="Odontograma"  >
                         <app-odontograma [dientes]="paciente.dientes" (refresh)="setDientes($event)" ></app-odontograma>
                     </mat-tab>
-                    <mat-tab label="Plan de tratamiento">
+                    <mat-tab label="Plan de tratamiento" >
                         <app-plan-tratamiento [tratamientos]="paciente.tratamientos" ></app-plan-tratamiento>
                     </mat-tab>
-                    <mat-tab label="Evoluciones">
+                    <mat-tab label="Evoluciones" >
                          
                         <app-evolucion [evoluciones]="paciente.evoluciones"  ></app-evolucion>
                     </mat-tab>
